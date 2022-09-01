@@ -1,0 +1,72 @@
+import React from 'react';
+import { ProjectBox } from './ProductBox';
+import pokedex from  '../images/project-images/pokedex.png'
+import aeropressTracker from '../images/project-images/aeropresstracker.png';
+import splitter from '../images/project-images/splitter.png';
+import styled from 'styled-components';
+
+interface Props {}
+
+export type Project = {
+  name: string;
+  url: string;
+  description: string;
+  img: string;
+};
+
+const projects: Project[] = [
+  {
+    name: 'Aeropress Tracker',
+    url: 'https://aeropresstracker.com/',
+    description: 'An app to track aeropress brews to make the perfect one!',
+    img: aeropressTracker,
+  },
+  {
+    name: 'Pokedex',
+    url: 'https://kylemckell.github.io/Pokedex/',
+    description: 'Pokedex app made with React and PokeAPI',
+    img: pokedex,
+  },
+];
+
+export const Projects = (props: Props) => {
+  return (
+    <Wrapper>
+      <Heading>My Projects</Heading>
+      <ProjectsWrapper>
+        {projects.map((project) => {
+          return <ProjectBox project={project} key={project.name} />;
+        })}
+      </ProjectsWrapper>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.section`
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const Heading = styled.h2`
+  color: var(--nord6);
+  text-align: center;
+  font-size: 2rem;
+
+  @media (max-width: 466px) {
+    text-align: revert;
+  }
+`;
+
+const ProjectsWrapper = styled.section`
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: clamp(24px, 8px + 4vw, 72px);
+  row-gap: 24px;
+  flex-wrap: wrap;
+`;
